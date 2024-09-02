@@ -1,4 +1,4 @@
-const app = require("./api/app.js");
+import app from "./api/app";
 
 process.on("uncaughtException", (err) => {
     console.log("UNCAUGHT EXCEPTION! 💥 Shutting down...");
