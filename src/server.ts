@@ -5,6 +5,7 @@ process.on("uncaughtException", (err) => {
     console.log(err);
     process.exit(1);
 });
+
 const port = process.env.PORT || 3000;
 
 const server = app.listen(port, () => {

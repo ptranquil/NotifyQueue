@@ -1,7 +1,8 @@
 module.exports = {
     apps: [{
-        name: "app",
-        script: "./dist/server.js",
+        name: "app",    
+        script: "./src/server.ts", // for development
+        // script: "./server.js",   // for production
         watch: true,
         autorestart: true,
         env: {
