@@ -12,7 +12,7 @@ module.exports = {
             DATABASE_HOST: '127.0.0.1',
             DATABASE_NAME: 'postgres',
             DATABASE_USER: 'postgres',
-            DATABASE_PASSWORD: 'root',
+            DATABASE_PASSWORD: 'postgres',
             REDIS_HOST: "127.0.0.1",
             REDIS_PORT: 6379
         },
@@ -23,7 +23,7 @@ module.exports = {
             DATABASE_HOST: '127.0.0.1',
             DATABASE_NAME: 'postgres',
             DATABASE_USER: 'postgres',
-            DATABASE_PASSWORD: 'root',
+            DATABASE_PASSWORD: 'postgres',
             REDIS_HOST: "127.0.0.1",
             REDIS_PORT: 6379
         },
