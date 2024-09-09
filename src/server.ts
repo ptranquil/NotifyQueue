@@ -1,3 +1,6 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import app from "./api/app";
 
 process.on("uncaughtException", (err) => {

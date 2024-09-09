@@ -56,6 +56,7 @@ class NotificationLogModel extends Model<NotificationLogAttributes, Notification
             },
             {
                 tableName: "NotificationLog",
+                freezeTableName: true,
                 schema: "notifyQueue",
                 timestamps: true,
                 sequelize,

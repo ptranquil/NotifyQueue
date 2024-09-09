@@ -33,6 +33,7 @@ class UserModel extends Model<UserAttributes, UserCreationAttributes> {
             {
                 tableName: "users",
                 schema: 'notifyQueue',
+                freezeTableName: true,
                 timestamps: true,
                 sequelize,
             }

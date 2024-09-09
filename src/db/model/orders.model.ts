@@ -33,11 +33,12 @@ class OrderModel extends Model<OrderAttributes, OrderCreationAttributes> {
                         "delivered",
                         "cancelled"
                     ),
-                    allowNull: true,
+                    allowNull: false,
                 },
             },
             {
                 tableName: "order",
+                freezeTableName: true,
                 schema: "notifyQueue",
                 timestamps: true,
                 sequelize,

@@ -24,7 +24,7 @@ dbConnection
         console.log("Connection has been established successfully.");
         await createDbSchema()
     })
-    .catch((err) => {
+    .catch((err: any) => {
         console.log("Unable to connect to the database:", err.message);
         throw new AppError(`Unable to connect to the database: ${err}`, 400);
     });
