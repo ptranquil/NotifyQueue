@@ -16,6 +16,7 @@ console.log(dbName, dbUser, dbPass, dbHost, dbDialect);
 const database = new Sequelize(dbName, dbUser, dbPass, {
     dialect: dbDialect,
     host: dbHost,
+    port:5432,
     define: {
         timestamps: false,
     },
