@@ -39,7 +39,7 @@ class OrderModel extends Model<OrderAttributes, OrderCreationAttributes> {
             {
                 tableName: "order",
                 freezeTableName: true,
-                schema: "notifyQueue",
+                schema: process.env.DATABASE_SCHEMA,
                 timestamps: true,
                 sequelize,
             }

@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import asyncHandler from "../utils/catchAsync";
-import { UserModel } from "../../db/dbConnection";
+import UserModel from "../../db/model/user.model";
 
 export const getUser = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const users = await UserModel.findAll({});

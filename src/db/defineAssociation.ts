@@ -1,6 +1,8 @@
-import { UserModel } from "./dbConnection";
+// import { UserModel, OrderModel, NotificationLogModel } from "./dbConnection";
+
 import NotificationLogModel from "./model/notification.model";
 import OrderModel from "./model/orders.model";
+import UserModel from "./model/user.model";
 
 /**
  * This file is responsible to defining all the assiciation between the tables
@@ -35,4 +37,6 @@ export const defineAssociations = () => {
     NotificationLogModel.belongsTo(OrderModel, {
         foreignKey: "orderId",
     });
+
+    console.log('Models association estableshed succesfully!')
 };
