@@ -16,6 +16,7 @@ const dbConnection = new Sequelize(dbName, dbUser, dbPass, {
     define: {
         timestamps: false,
     },
+    logging: false
 });
 
 const createDbSchema = async () => {
@@ -30,7 +31,7 @@ const createDbSchema = async () => {
 const dbSync = async () => {
     let models = [UserModel, OrderModel, NotificationLogModel];
     models.forEach((model) => model.initialize(dbConnection));
-    dbConnection.sync({ alter: false, force: false,logging: false });
+    dbConnection.sync({ alter: false, force: false, logging: false });
     console.log('DB Synchonization completed!')
 }
 

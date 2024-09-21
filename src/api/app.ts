@@ -2,10 +2,8 @@ import express, { Request, Response, NextFunction } from "express";
 import { globalErrorHandler } from "./controller/error.controller";
 import appRouter from "./routes/index.routes";
 import { initializeDbAndTriggers } from "./utils/helper";
-import { initiateAMQPServerConnection } from "./utils/amqpConnection";
 
 const app = express();
-let queueConnection;
 
 app.use(express.json({ limit: "10000kb" }));
 app.use(express.urlencoded({ extended: true, limit: "10000kb" }));
@@ -20,11 +18,6 @@ app.use("/health-check", (req: Request, res: Response) => {
 
 // Initialize database and triggers
 initializeDbAndTriggers();
-
-// Initialize AMQP
-(async () => {
-    queueConnection = await initiateAMQPServerConnection();
-})();
 
 app.use("/api/v1/", appRouter);
 
