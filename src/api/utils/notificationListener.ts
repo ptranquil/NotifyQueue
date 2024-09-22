@@ -3,6 +3,8 @@ import { dbConnection } from "../../db/dbConnection";
 import { getConsumerChannel, getProducerChannel } from "./amqpConnection";
 import NotificationLogModel from "../../db/model/notification.model";
 import { Message } from "amqplib";
+import { sendOrderStatusEmail } from "../controller/mail.controller";
+import { getUserDetails } from "../controller/user.controller";
 
 export const setupNotificationListener = async () => {
     const getConnectionOpt: GetConnectionOptions = {
@@ -21,15 +23,13 @@ export const setupNotificationListener = async () => {
                 `New notification received, Channel name: ${notification.channel}.`
             );
             if (notification.channel === "order_status_notification") {
-                console.debug(`Received notification for ${notification.channel}. Triggering rabbit mq producer for message ${notification.payload}.`);
+                console.debug(
+                    `Triggering rabbit mq producer for message ${notification.payload}.`
+                );
 
-                console.log("notification.payload:::::::::::::::::::::::::::",notification.payload);
                 const parsedPayload = JSON.parse(notification.payload);
                 const oldData = parsedPayload.old;
                 const newData = parsedPayload.new;
-
-                console.debug("Old Data:", oldData);
-                console.debug("New Data:", newData);
 
                 await NotificationLogModel.create({
                     userId: newData.userId,
@@ -78,12 +78,17 @@ export const queueConsumer = async () => {
                         message.content.toString()
                     )}`
                 );
-                /**
-                 * TODO: Implement the notification sending mechanism
-                 * and based on the status update the queue
-                 */
+                const data = JSON.parse(message.content.toString());
+                const userData = await getUserDetails(data.new.userId);
+                await sendOrderStatusEmail(
+                    userData.name,
+                    data.new.id,
+                    data.new.status,
+                    userData.email
+                );
                 consumer.ack(message); // Acknowledge the message after processing
             } catch (error: any) {
+                consumer.reject(message, false);
                 console.error(
                     `Internal error @ RMQ consumer: ${error.message}`
                 );
